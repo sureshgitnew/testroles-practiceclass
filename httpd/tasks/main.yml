@@ -1,0 +1,18 @@
+---
+# tasks file for httpd
+- name: Install Apache HTTPD
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+- name: Start and enable HTTPD service
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: files/index.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
